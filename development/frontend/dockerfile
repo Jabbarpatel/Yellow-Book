@@ -1,0 +1,29 @@
+FROM oven/bun:canary-alpine AS base
+
+WORKDIR /yellowbook/frontend
+
+ADD ./frontend/package.json ./frontend/bun.lock /yellowbook/frontend/
+
+RUN bun install
+
+ADD ./frontend /yellowbook/frontend/
+
+FROM base AS dev
+
+EXPOSE 3000
+
+CMD [ "bun","run","dev" ]
+
+FROM base AS build
+
+RUN bun run build
+
+FROM nginx:alpine AS prod
+
+COPY ../nginx.config /etc/nginx/nginx.conf
+
+COPY --from=build /yellowbook/frontend/dist /usr/share/nginx/html
+
+EXPOSE 80
+
+CMD ["nginx", "-g", "daemon off;"]

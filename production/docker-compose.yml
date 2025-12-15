@@ -1,0 +1,41 @@
+services:
+  frontend:
+    image: ${FRONTEND_IMAGE}:${VERSION}
+    container_name: yellowbook-production-frontend-${VERSION}
+    ports:
+      - "80:${FRONTEND_PORT}"
+    restart: always
+    env_file:
+      - .env
+
+  backend:
+    image: ${BACKEND_IMAGE}:${VERSION}
+    container_name: yellowbook-production-backend-${VERSION}
+    expose:
+      - ${BACKEND_PORT}
+    restart: always
+    depends_on:
+      - db
+    env_file:
+      - .env
+
+  db:
+    image: mysql:8.0.40
+    container_name: production-database
+    expose:
+      - "${MYSQL_DB_PORT}"
+    environment:
+      MYSQL_ROOT_PASSWORD: ${MYSQL_DB_PASSWORD}
+      MYSQL_DATABASE: ${MYSQL_DB_DATABASE}
+    volumes:
+      - mysql_data:/var/lib/mysql
+    restart: always
+    env_file:
+      - .env
+
+volumes:
+  mysql_data:
+
+networks:
+  default:
+    driver: bridge

@@ -1,0 +1,61 @@
+services:
+  frontend:
+    build:
+      context: .
+      dockerfile: ./frontend/dockerfile
+      target: dev
+    ports:
+      - "${FRONTEND_PORT}:${FRONTEND_PORT}"
+    volumes:
+      - ./frontend:/yellowbook/frontend
+    restart: always
+    depends_on:
+      - backend
+    env_file:
+      - .env
+
+  backend:
+    build:
+      context: .
+      dockerfile: ./backend/dockerfile
+      target: dev
+    ports:
+      - "${BACKEND_PORT}:${BACKEND_PORT}"
+    volumes:
+      - ./backend:/yellowbook/backend
+    restart: always
+    depends_on:
+      - db
+    env_file:
+      - .env
+
+  db:
+    image: mysql:8.0.40
+    container_name: development-database
+    ports:
+      - "3308:${MYSQL_DB_PORT}"
+    environment:
+      MYSQL_ROOT_PASSWORD: ${MYSQL_DB_PASSWORD}
+      MYSQL_DATABASE: ${MYSQL_DB_DATABASE}
+    volumes:
+      - ./project-data/mysql:/var/lib/mysql
+    restart: always
+    env_file:
+      - .env
+
+  phpmyadmin:
+    image: phpmyadmin/phpmyadmin
+    ports:
+      - "8084:80"
+    environment:
+      MYSQL_ROOT_PASSWORD: ${MYSQL_DB_PASSWORD}
+      MYSQL_DATABASE: ${MYSQL_DB_DATABASE}
+      PMA_ARBITRARY: 1
+      UPLOAD_LIMIT: 1024M
+    restart: always
+    env_file:
+      - .env
+
+networks:
+  default:
+    driver: bridge
