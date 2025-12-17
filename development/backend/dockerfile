@@ -24,10 +24,10 @@ CMD ["air"]
 
 FROM base AS prod
 
-WORKDIR /prod/gobinary
+WORKDIR /yellowbook/production
 
 COPY --from=build /yellowbook/backend/binary ./binary
 
 EXPOSE 8085
 
-CMD ["/prod/gobinary/binary"]
+CMD ["/yellowbook/production/binary"]
