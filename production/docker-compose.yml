@@ -1,6 +1,6 @@
 services:
   frontend:
-    image: jabbarpatel/yellow-book-production-frontend:{VERSION}
+    image: jabbarpatel/yellow-book-production-frontend:${VERSION}
     ports:
       - "80:${FRONTEND_PORT}"
     restart: always
@@ -8,7 +8,7 @@ services:
       - .env
 
   backend:
-    image: jabbarpatel/yellow-book-production-production:{VERSION}
+    image: jabbarpatel/yellow-book-production-backend:${VERSION}
     expose:
       - ${BACKEND_PORT}
     restart: always
