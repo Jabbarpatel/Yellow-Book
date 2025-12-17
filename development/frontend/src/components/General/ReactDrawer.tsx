@@ -5,7 +5,7 @@ export type Props = {
   open: boolean;
   children: ReactNode;
   handleClose?: () => void;
-  size?: string;
+  size?: "xs" | "sm" | "md" | "lg" | "full";
   title?: string;
   footer?: () => JSX.Element | null;
 };
