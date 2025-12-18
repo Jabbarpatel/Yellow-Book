@@ -16,7 +16,7 @@ const ReactDrawer = ({
   handleClose = () => {},
   size = "xs",
   title = "This is title",
-  footer = () => <span>This is footer</span>,
+  footer = () => <span>This is footer1245</span>,
 }: Props) => {
   return (
     <Drawer open={open} onClose={handleClose} size={size}>
