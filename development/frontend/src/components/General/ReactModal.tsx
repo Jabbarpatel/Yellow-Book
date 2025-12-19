@@ -19,17 +19,15 @@ const ReactModal = ({
   handleClose = () => {},
 }: Props) => {
   return (
-    <>
-      <Modal open={open} onClose={handleClose} size={size}>
-        <Modal.Header>
-          <Modal.Title style={{ fontWeight: "bold" }}>{title}</Modal.Title>
-        </Modal.Header>
-        <Divider />
-        <Modal.Body>{children}</Modal.Body>
-        <Divider />
-        <Modal.Footer>{handleFooter()}</Modal.Footer>
-      </Modal>
-    </>
+    <Modal open={open} onClose={handleClose} size={size}>
+      <Modal.Header>
+        <Modal.Title style={{ fontWeight: "bold" }}>{title}</Modal.Title>
+      </Modal.Header>
+      <Divider />
+      <Modal.Body>{children}</Modal.Body>
+      <Divider />
+      <Modal.Footer>{handleFooter()}</Modal.Footer>
+    </Modal>
   );
 };
 
