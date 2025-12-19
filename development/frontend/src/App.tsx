@@ -1,8 +1,8 @@
 import "./App.css";
-import Providers from "./components/Providers/Providers";
+import "rsuite/dist/rsuite.css";
 
 function App() {
-  return <Providers>THIS IS OK</Providers>;
+  return "This is OKKKKKKKKKK";
 }
 
 export default App;
