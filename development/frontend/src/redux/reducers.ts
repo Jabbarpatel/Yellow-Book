@@ -1,5 +1,4 @@
 import { DECREAMENT, INCREAMENT } from "./actions";
-import { Actions } from "./types";
 
 type State = {
   count: number;
@@ -9,7 +8,7 @@ const initialState: State = {
   count: 0,
 };
 
-export const Reducer = (state: State = initialState, action: Actions) => {
+export const Reducer = (state: State = initialState, action: {type:string}) => {
   switch (action.type) {
     case INCREAMENT:
       return { ...state, count: state.count + 1 };
