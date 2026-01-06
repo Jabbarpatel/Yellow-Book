@@ -20,6 +20,8 @@ RUN go install github.com/air-verse/air && \
 
 ENV PATH="/go/bin:${PATH}"
 
+EXPOSE 8085
+
 CMD ["air"]
 
 FROM base AS prod

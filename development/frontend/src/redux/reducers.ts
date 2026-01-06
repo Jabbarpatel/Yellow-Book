@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import { SET_TOKEN, SET_USER_LOGGED_IN } from "./actions";
 
 type State = {

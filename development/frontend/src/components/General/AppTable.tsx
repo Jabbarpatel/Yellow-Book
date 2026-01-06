@@ -1,29 +1,50 @@
-import { ReactNode } from "react";
-import { Table, TableProps } from "rsuite";
+import React from "react";
+import {
+  Table,
+  TableHeader,
+  TableColumn,
+  TableRow,
+  TableBody,
+  TableProps,
+} from "@heroui/react";
 
-type Props = TableProps & {
-  data: object[];
-  onRowClick?: (value: object) => void | undefined;
-  children: ReactNode;
+type Columns = {
+  width?: string;
+  header: string;
 };
 
-const AppTable = ({
-  data,
-  height = 400,
-  onRowClick = undefined,
-  children,
-  ...props
-}: Props) => {
+type Props<T> = TableProps & {
+  items: T[];
+  columns: Columns[];
+  renderRow: (item: T, index: number) => React.ReactElement<typeof TableRow>;
+};
+
+const AppTable = <T,>({ items, columns, renderRow, ...props }: Props<T>) => {
   return (
     <Table
-      height={height}
-      data={data}
-      onRowClick={(rowData: object) => {
-        onRowClick?.(rowData);
+      isHeaderSticky
+      aria-label="Reusable table"
+      selectionMode="single"
+      classNames={{
+        wrapper: "max-h-[77vh] scrollbar-w-thin",
       }}
+      align="center"
       {...props}
     >
-      {children}
+      <TableHeader>
+        {columns.map((item) => (
+          <TableColumn
+            key={item.header}
+            style={{ fontSize: "13px", width: item.width }}
+          >
+            {item.header}
+          </TableColumn>
+        ))}
+      </TableHeader>
+
+      <TableBody items={items} emptyContent="No rows found">
+        {items.map((item, index) => renderRow(item, index))}
+      </TableBody>
     </Table>
   );
 };

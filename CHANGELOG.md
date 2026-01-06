@@ -8,3 +8,4 @@ Documentation for release versions of Yellow Book
 -> Added axios headers to access the API.
 -> Added MUI,jwt and @reduxjs/toolkit packages.
 -> Added endpoint to get versions.
+-> Added a custom AppTable component.

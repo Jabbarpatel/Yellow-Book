@@ -2,7 +2,7 @@ name: "yellow book"
 
 services:
   frontend:
-    image: jabbarpatel/yellow-book-development-frontend:${VERSION}
+    image: jabbarpatel/yellow-book-development-frontend:${DEV_VERSION}
     ports:
       - "${FRONTEND_PORT}:${FRONTEND_PORT}"
     volumes:
@@ -14,7 +14,7 @@ services:
       - .env
 
   backend:
-    image: jabbarpatel/yellow-book-development-backend:${VERSION}
+    image: jabbarpatel/yellow-book-development-backend:${DEV_VERSION}
     ports:
       - "${BACKEND_PORT}:${BACKEND_PORT}"
     volumes:
